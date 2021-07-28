@@ -1,0 +1,38 @@
+.header {
+    background-color: $color-orange;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // flex-direction: column;
+    justify-content: space-around;
+
+    .btn {
+        background-color: $color-gray;
+        border: 0.2px solid $color-gray;
+        border-radius: 5px;
+        color: $color-orange;
+        font-family: $font-text;
+        padding: 5px 20px;
+        cursor: pointer;
+    }
+
+    .headerInput {
+
+        input {
+            padding: 5px 20px;
+            font-family: $font-text;
+            outline: none;
+            border-radius: 5px;
+            border: 0.2px solid $color-orange;
+        }
+    }
+
+    .headerInput {
+        display: flex;
+
+        p {
+            padding-right: 5px; 
+        }
+    }
+}
