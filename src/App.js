@@ -3,6 +3,7 @@ import "./scss/style.scss";
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Welcome from "./Welcome";
 import DriversTable from "./DriversTable";
+import NotFound from "./NotFound";
 
 export default class App extends React.Component {
     constructor() {
@@ -32,6 +33,9 @@ export default class App extends React.Component {
 
     showResultsFunc() {
         console.log("User choosed", this.state.value, "year");
+        // if(this.state.value < 1950) {
+        //     alert("Data do not exist. First Forumula One Championship was held in 1950.")
+        // }
     }
 
     render() {
@@ -49,6 +53,7 @@ export default class App extends React.Component {
                             <input type="number" placeholder="Enter year..." value={this.state.value} onChange={this.inputFunc}/>
                         </div>
                         
+                        
                         <div className="headerClick">
                             <Link to={{pathname: "/initialTable", state: {year: this.state.value}}}>
                                 <input type="button" value="Show results" className="btn" onClick={this.showResultsFunc}/>
@@ -58,7 +63,8 @@ export default class App extends React.Component {
                     </div>
                     <div className="content">
                         <Route path="/" exact component={Welcome}/>
-                        <Route path="/initialTable" exact component={DriversTable}/>
+                        {this.state.value > 1949 ? <Route path="/initialTable" exact component={DriversTable}/> : 
+                        <Route path="/initialTable" exact component={NotFound}/>}
                     </div>
                 </Router>
             </div>

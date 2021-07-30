@@ -70,10 +70,62 @@ export default class DriversTable extends React.Component {
                     <td>
                       <div>
                         {this.state.flags.map((flag, i) => {
-                          if(driver.Driver.nationality === flag.nationality) {
-                            return(
-                              <Flag key={i} country={flag.alpha_2_code} size={25}/>
-                            )
+ 
+                          if (driver.Driver.nationality === "British") {
+                            if(flag.nationality === "British, UK") {
+                              return(
+                                <Flag key={i} country="GB" size={25}/>
+                              )
+                            }
+                          } else if (driver.Driver.nationality === "Dutch") {
+                            if(flag.nationality === "Dutch, Netherlandic") {
+                              return(
+                                <Flag key={i} country="NL" size={25}/>
+                              )
+                            }
+                          } else if (driver.Driver.nationality === "Monegasque") {
+                            if(flag.nationality === "Monégasque, Monacan") {
+                              return(
+                                <Flag key={i} country="MC" size={25}/>
+                              )
+                            }
+                          } else if (driver.Driver.nationality === "New Zealander") {
+                            if(flag.nationality === "New Zealand, NZ") {
+                              return(
+                                <Flag key={i} country="NZ" size={25}/>
+                              )
+                            }
+                          } else if (driver.Driver.nationality === "American") {
+                            if(flag.en_short_name === "United States of America") {
+                              return(
+                                  <Flag key={i} country="US" size={25}/>
+                              )
+                            }
+                          } else if (driver.Driver.nationality === "Hungarian") {
+                            if(flag.nationality === "Hungarian, Magyar") {
+                              return(
+                                  <Flag key={i} country="HU" size={25}/>
+                              )
+                            }
+                          } else if (driver.Driver.nationality === "Liechtensteiner") {
+                            if(flag.nationality === "Liechtenstein") {
+                              return(
+                                  <Flag key={i} country="LI" size={25}/>
+                              )
+                            }
+                          } else if (driver.Driver.nationality === "Rhodesian") {
+                            if(flag.nationality === "Zimbabwean") {
+                              return(
+                                  <Flag key={i} country="ZW" size={25}/>
+                              )
+                            }
+                          }
+                          else {
+                            if(driver.Driver.nationality === flag.nationality) {
+                              return(
+                                <Flag key={i} country={flag.alpha_2_code} size={25}/>
+                              )
+                            } 
                           }
                         })}
                         {driver.Driver.givenName + " " + driver.Driver.familyName}
@@ -81,7 +133,52 @@ export default class DriversTable extends React.Component {
                     </td>
                   
                   <td>{driver.Driver.dateOfBirth}</td>
-                  <td>{driver.Constructors[0].name}</td>
+                  <td>
+                    <div>
+                      {this.state.flags.map((flag, i) => {
+
+                        if (driver.Constructors[0].nationality === "British") {
+                          if(flag.nationality === "British, UK") {
+                            return(
+                              <Flag key={i} country="GB" size={25}/>
+                            )
+                          }
+                        } else if (driver.Constructors[0].nationality === "American") {
+                          if(flag.en_short_name === "United States of America") {
+                            return(
+                                <Flag key={i} country="US" size={25}/>
+                            )
+                          }
+                        } else if (driver.Constructors[0].nationality === "Dutch") {
+                          if(flag.nationality === "Dutch, Netherlandic") {
+                            return(
+                                <Flag key={i} country="NL" size={25}/>
+                            )
+                          }
+                        } else if (driver.Constructors[0].nationality === "Hong Kong") {
+                          if(flag.nationality === "Hong Kong, Hong Kongese") {
+                            return(
+                                <Flag key={i} country="HK" size={25}/>
+                            )
+                          }
+                        } else if (driver.Constructors[0].nationality === "New Zealand") {
+                          if(flag.nationality === "New Zealand, NZ") {
+                            return(
+                              <Flag key={i} country="NZ" size={25}/>
+                            )
+                          }
+                        }
+                        else {
+                          if(driver.Constructors[0].nationality === flag.nationality) {
+                            return (
+                              <Flag key={i} country={flag.alpha_2_code} size={25}/>
+                            )
+                          }
+                        }
+                      })}
+                      {driver.Constructors[0].name}
+                    </div>
+                  </td>
                   <td>{driver.points}</td>
                   <td>{driver.wins}</td>
                   <td><a href={driver.Driver.url} target="_blank"><i className="fas fa-external-link-alt"></i></a></td>

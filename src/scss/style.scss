@@ -22,5 +22,18 @@ body {
             font-family: $font-headline;
             text-align: center;
         }
+
+        .notFound {
+            background-color: #ddd;
+            color: $color-gray;
+            font-weight: bold;
+            font-size: 1.8em;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
     }
 }
