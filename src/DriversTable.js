@@ -1,6 +1,7 @@
 import React from "react";
 import * as $ from "jquery";
 import Flag from 'react-flagkit';
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 export default class DriversTable extends React.Component {
   constructor() {
@@ -28,13 +29,13 @@ export default class DriversTable extends React.Component {
 
 
   //just for more than one call, not working with single code when it throws error
-  getDrivers(year) {
+  getDrivers(year, id) {
     var urlDrivers = $.ajax(`http://ergast.com/api/f1/${year}/driverStandings.json`);
     var urlFlags = $.ajax("https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json");
     var urlTeams = $.ajax(`http://ergast.com/api/f1/${year}/constructorStandings.json`);
 
     $.when(urlDrivers, urlFlags, urlTeams).done(
-      function(data1, data2, data3) {
+      function (data1, data2, data3) {
         console.log(data1);
         console.log(data2);
         console.log(data3);
@@ -69,171 +70,174 @@ export default class DriversTable extends React.Component {
           </thead>
           <tbody>
             {this.state.drivers.map((driver, i) => {
-              
+
               return (
                 <tr key={i}>
                   <td>{driver.position}</td>
-                    
-                    <td>
-                      <div>
 
-                        {this.state.flags.map((flag, i) => {
- 
-                          if (driver.Driver.nationality === "British") {
-                            if(flag.nationality === "British, UK") {
-                              return(
-                                <Flag key={i} country="GB" size={25}/>
-                              )
-                            }
-                          } else if (driver.Driver.nationality === "Dutch") {
-                            if(flag.nationality === "Dutch, Netherlandic") {
-                              return(
-                                <Flag key={i} country="NL" size={25}/>
-                              )
-                            }
-                          } else if (driver.Driver.nationality === "Monegasque") {
-                            if(flag.nationality === "Monégasque, Monacan") {
-                              return(
-                                <Flag key={i} country="MC" size={25}/>
-                              )
-                            }
-                          } else if (driver.Driver.nationality === "New Zealander") {
-                            if(flag.nationality === "New Zealand, NZ") {
-                              return(
-                                <Flag key={i} country="NZ" size={25}/>
-                              )
-                            }
-                          } else if (driver.Driver.nationality === "American") {
-                            if(flag.en_short_name === "United States of America") {
-                              return(
-                                  <Flag key={i} country="US" size={25}/>
-                              )
-                            }
-                          } else if (driver.Driver.nationality === "Hungarian") {
-                            if(flag.nationality === "Hungarian, Magyar") {
-                              return(
-                                  <Flag key={i} country="HU" size={25}/>
-                              )
-                            }
-                          } else if (driver.Driver.nationality === "Liechtensteiner") {
-                            if(flag.nationality === "Liechtenstein") {
-                              return(
-                                  <Flag key={i} country="LI" size={25}/>
-                              )
-                            }
-                          } else if (driver.Driver.nationality === "Rhodesian") {
-                            if(flag.nationality === "Zimbabwean") {
-                              return(
-                                  <Flag key={i} country="ZW" size={25}/>
-                              )
-                            }
+                  <td>
+                    <div>
+
+                      {this.state.flags.map((flag, i) => {
+
+                        if (driver.Driver.nationality === "British") {
+                          if (flag.nationality === "British, UK") {
+                            return (
+                              <Flag key={i} country="GB" size={25} />
+                            )
                           }
-                          else {
-                            if(driver.Driver.nationality === flag.nationality) {
-                              return(
-                                <Flag key={i} country={flag.alpha_2_code} size={25}/>
-                              )
-                            } 
+                        } else if (driver.Driver.nationality === "Dutch") {
+                          if (flag.nationality === "Dutch, Netherlandic") {
+                            return (
+                              <Flag key={i} country="NL" size={25} />
+                            )
                           }
-                        })}
-                        {driver.Driver.givenName + " " + driver.Driver.familyName}
-                      </div>
-                    </td>
-                  
+                        } else if (driver.Driver.nationality === "Monegasque") {
+                          if (flag.nationality === "Monégasque, Monacan") {
+                            return (
+                              <Flag key={i} country="MC" size={25} />
+                            )
+                          }
+                        } else if (driver.Driver.nationality === "New Zealander") {
+                          if (flag.nationality === "New Zealand, NZ") {
+                            return (
+                              <Flag key={i} country="NZ" size={25} />
+                            )
+                          }
+                        } else if (driver.Driver.nationality === "American") {
+                          if (flag.en_short_name === "United States of America") {
+                            return (
+                              <Flag key={i} country="US" size={25} />
+                            )
+                          }
+                        } else if (driver.Driver.nationality === "Hungarian") {
+                          if (flag.nationality === "Hungarian, Magyar") {
+                            return (
+                              <Flag key={i} country="HU" size={25} />
+                            )
+                          }
+                        } else if (driver.Driver.nationality === "Liechtensteiner") {
+                          if (flag.nationality === "Liechtenstein") {
+                            return (
+                              <Flag key={i} country="LI" size={25} />
+                            )
+                          }
+                        } else if (driver.Driver.nationality === "Rhodesian") {
+                          if (flag.nationality === "Zimbabwean") {
+                            return (
+                              <Flag key={i} country="ZW" size={25} />
+                            )
+                          }
+                        }
+                        else {
+                          if (driver.Driver.nationality === flag.nationality) {
+                            return (
+                              <Flag key={i} country={flag.alpha_2_code} size={25} />
+                            )
+                          }
+                        }
+                      })}
+                      {driver.Driver.givenName + " " + driver.Driver.familyName}
+                    </div>
+                  </td>
+
                   <td>{driver.Driver.dateOfBirth}</td>
                   <td>
                     <div>
                       {this.state.flags.map((flag, i) => {
 
                         if (driver.Constructors[0].nationality === "British") {
-                          if(flag.nationality === "British, UK") {
-                            return(
-                              <Flag key={i} country="GB" size={25}/>
+                          if (flag.nationality === "British, UK") {
+                            return (
+                              <Flag key={i} country="GB" size={25} />
                             )
                           }
                         } else if (driver.Constructors[0].nationality === "American") {
-                          if(flag.en_short_name === "United States of America") {
-                            return(
-                                <Flag key={i} country="US" size={25}/>
+                          if (flag.en_short_name === "United States of America") {
+                            return (
+                              <Flag key={i} country="US" size={25} />
                             )
                           }
                         } else if (driver.Constructors[0].nationality === "Dutch") {
-                          if(flag.nationality === "Dutch, Netherlandic") {
-                            return(
-                                <Flag key={i} country="NL" size={25}/>
+                          if (flag.nationality === "Dutch, Netherlandic") {
+                            return (
+                              <Flag key={i} country="NL" size={25} />
                             )
                           }
                         } else if (driver.Constructors[0].nationality === "Hong Kong") {
-                          if(flag.nationality === "Hong Kong, Hong Kongese") {
-                            return(
-                                <Flag key={i} country="HK" size={25}/>
+                          if (flag.nationality === "Hong Kong, Hong Kongese") {
+                            return (
+                              <Flag key={i} country="HK" size={25} />
                             )
                           }
                         } else if (driver.Constructors[0].nationality === "New Zealand") {
-                          if(flag.nationality === "New Zealand, NZ") {
-                            return(
-                              <Flag key={i} country="NZ" size={25}/>
+                          if (flag.nationality === "New Zealand, NZ") {
+                            return (
+                              <Flag key={i} country="NZ" size={25} />
                             )
                           }
                         }
                         else {
-                          if(driver.Constructors[0].nationality === flag.nationality) {
+                          if (driver.Constructors[0].nationality === flag.nationality) {
                             return (
-                              <Flag key={i} country={flag.alpha_2_code} size={25}/>
+                              <Flag key={i} country={flag.alpha_2_code} size={25} />
                             )
                           }
                         }
                       })}
                       {/* {driver.Constructors[0].name} */}
-                      
+
                       {this.state.teams.map((team, i) => {
-                          if(driver.Constructors[0].name === team.Constructor.name) {
-                            return(
-                              <p key={i}>{team.Constructor.name}</p>
-                            )
-                          } 
+
+                        if (driver.Constructors[0].name === team.Constructor.name) {
+                          return (
+                            <Link to={{ pathname: `/initialTable/teams/${team.Constructor.constructorId}`, state: { year: this.props.location.state.year } }}>
+                              {team.Constructor.name}
+                            </Link>
+                          )
+                        }
                       })}
 
                       {this.state.teamsSeason.map((season, i) => {
-                        if(driver.Constructors[0].name === "Phillips"){
-                          if(season.season === "1958" || season.season === "1960") {
-                            return(
+                        if (driver.Constructors[0].name === "Phillips") {
+                          if (season.season === "1958" || season.season === "1960") {
+                            return (
                               <p key={i}>{driver.Constructors[0].name}</p>
                             )
                           }
-                        } else if(driver.Constructors[0].name === "Watson"){
-                          if(season.season === "1958" || season.season === "1959" || season.season === "1960") {
-                            return(
+                        } else if (driver.Constructors[0].name === "Watson") {
+                          if (season.season === "1958" || season.season === "1959" || season.season === "1960") {
+                            return (
                               <p key={i}>{driver.Constructors[0].name}</p>
                             )
                           }
-                        } else if(driver.Constructors[0].name === "Epperly"){
-                          if(season.season === "1958" || season.season === "1959" || season.season === "1960") {
-                            return(
+                        } else if (driver.Constructors[0].name === "Epperly") {
+                          if (season.season === "1958" || season.season === "1959" || season.season === "1960") {
+                            return (
                               <p key={i}>{driver.Constructors[0].name}</p>
                             )
                           }
-                        } else if(driver.Constructors[0].name === "Kurtis Kraft"){
-                          if(season.season === "1958") {
-                            return(
+                        } else if (driver.Constructors[0].name === "Kurtis Kraft") {
+                          if (season.season === "1958") {
+                            return (
                               <p key={i}>{driver.Constructors[0].name}</p>
                             )
                           }
-                        } else if(driver.Constructors[0].name === "Lesovsky"){
-                          if(season.season === "1959" || season.season === "1960") {
-                            return(
+                        } else if (driver.Constructors[0].name === "Lesovsky") {
+                          if (season.season === "1959" || season.season === "1960") {
+                            return (
                               <p key={i}>{driver.Constructors[0].name}</p>
                             )
                           }
-                        } else if(driver.Constructors[0].name === "Trevis"){
-                          if(season.season === "1960") {
-                            return(
+                        } else if (driver.Constructors[0].name === "Trevis") {
+                          if (season.season === "1960") {
+                            return (
                               <p key={i}>{driver.Constructors[0].name}</p>
                             )
                           }
-                        } 
+                        }
                       })}
-                      
+
                     </div>
                   </td>
                   <td>{driver.points}</td>

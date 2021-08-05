@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Welcome from "./Welcome";
 import DriversTable from "./DriversTable";
 import NotFound from "./NotFound";
+import TeamDetails from "./TeamDetails";
 
 export default class App extends React.Component {
     constructor() {
@@ -65,6 +66,7 @@ export default class App extends React.Component {
                         <Route path="/" exact component={Welcome}/>
                         {this.state.value > 1957 ? <Route path="/initialTable" exact component={DriversTable}/> : 
                         <Route path="/initialTable" exact component={NotFound}/>}
+                        <Route path="/initialTable/teams/:id" exact component={TeamDetails}/>
                     </div>
                 </Router>
             </div>
