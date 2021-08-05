@@ -8,7 +8,9 @@ export default class DriversTable extends React.Component {
 
     this.state = {
       drivers: [],
-      flags: []
+      flags: [],
+      teams: [],
+      teamsSeason: []
     }
   }
 
@@ -29,15 +31,19 @@ export default class DriversTable extends React.Component {
   getDrivers(year) {
     var urlDrivers = $.ajax(`http://ergast.com/api/f1/${year}/driverStandings.json`);
     var urlFlags = $.ajax("https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json");
+    var urlTeams = $.ajax(`http://ergast.com/api/f1/${year}/constructorStandings.json`);
 
-    $.when(urlDrivers, urlFlags).done(
-      function(data1, data2) {
+    $.when(urlDrivers, urlFlags, urlTeams).done(
+      function(data1, data2, data3) {
         console.log(data1);
         console.log(data2);
+        console.log(data3);
 
         this.setState({
           drivers: data1[0].MRData.StandingsTable.StandingsLists[0].DriverStandings,
-          flags: JSON.parse(data2[0])
+          flags: JSON.parse(data2[0]),
+          teams: data3[0].MRData.StandingsTable.StandingsLists[0].ConstructorStandings,
+          teamsSeason: data3[0].MRData.StandingsTable.StandingsLists
         })
 
       }.bind(this)
@@ -63,12 +69,14 @@ export default class DriversTable extends React.Component {
           </thead>
           <tbody>
             {this.state.drivers.map((driver, i) => {
+              
               return (
                 <tr key={i}>
                   <td>{driver.position}</td>
                     
                     <td>
                       <div>
+
                         {this.state.flags.map((flag, i) => {
  
                           if (driver.Driver.nationality === "British") {
@@ -176,7 +184,56 @@ export default class DriversTable extends React.Component {
                           }
                         }
                       })}
-                      {driver.Constructors[0].name}
+                      {/* {driver.Constructors[0].name} */}
+                      
+                      {this.state.teams.map((team, i) => {
+                          if(driver.Constructors[0].name === team.Constructor.name) {
+                            return(
+                              <p key={i}>{team.Constructor.name}</p>
+                            )
+                          } 
+                      })}
+
+                      {this.state.teamsSeason.map((season, i) => {
+                        if(driver.Constructors[0].name === "Phillips"){
+                          if(season.season === "1958" || season.season === "1960") {
+                            return(
+                              <p key={i}>{driver.Constructors[0].name}</p>
+                            )
+                          }
+                        } else if(driver.Constructors[0].name === "Watson"){
+                          if(season.season === "1958" || season.season === "1959" || season.season === "1960") {
+                            return(
+                              <p key={i}>{driver.Constructors[0].name}</p>
+                            )
+                          }
+                        } else if(driver.Constructors[0].name === "Epperly"){
+                          if(season.season === "1958" || season.season === "1959" || season.season === "1960") {
+                            return(
+                              <p key={i}>{driver.Constructors[0].name}</p>
+                            )
+                          }
+                        } else if(driver.Constructors[0].name === "Kurtis Kraft"){
+                          if(season.season === "1958") {
+                            return(
+                              <p key={i}>{driver.Constructors[0].name}</p>
+                            )
+                          }
+                        } else if(driver.Constructors[0].name === "Lesovsky"){
+                          if(season.season === "1959" || season.season === "1960") {
+                            return(
+                              <p key={i}>{driver.Constructors[0].name}</p>
+                            )
+                          }
+                        } else if(driver.Constructors[0].name === "Trevis"){
+                          if(season.season === "1960") {
+                            return(
+                              <p key={i}>{driver.Constructors[0].name}</p>
+                            )
+                          }
+                        } 
+                      })}
+                      
                     </div>
                   </td>
                   <td>{driver.points}</td>

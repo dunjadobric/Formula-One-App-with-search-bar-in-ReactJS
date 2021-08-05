@@ -63,7 +63,7 @@ export default class App extends React.Component {
                     </div>
                     <div className="content">
                         <Route path="/" exact component={Welcome}/>
-                        {this.state.value > 1949 ? <Route path="/initialTable" exact component={DriversTable}/> : 
+                        {this.state.value > 1957 ? <Route path="/initialTable" exact component={DriversTable}/> : 
                         <Route path="/initialTable" exact component={NotFound}/>}
                     </div>
                 </Router>

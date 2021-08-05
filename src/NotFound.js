@@ -5,7 +5,7 @@ export default class NotFound extends React.Component {
         return(
             <div className="notFound">
                 <p>The first Formula One World Championship took place in 1950.</p>
-                <p>Data on races before that year are not available. Please return to home page.</p>
+                <p>Data before 1958 are not available. Please return to home page.</p>
             </div>
         )
     }

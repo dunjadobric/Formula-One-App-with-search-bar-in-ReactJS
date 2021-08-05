@@ -17,10 +17,12 @@ body {
         height: calc(100% - 60px);
 
         .welcomePara {
+            background-color: rgba(77, 75, 75, 0.6);
             color: $color-orange;
             font-size: 5rem;
             font-family: $font-headline;
             text-align: center;
+            padding: 5px 10px;
         }
 
         .notFound {
