@@ -29,7 +29,7 @@ export default class DriversTable extends React.Component {
 
 
   //just for more than one call, not working with single code when it throws error
-  getDrivers(year, id) {
+  getDrivers(year) {
     var urlDrivers = $.ajax(`http://ergast.com/api/f1/${year}/driverStandings.json`);
     var urlFlags = $.ajax("https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json");
     var urlTeams = $.ajax(`http://ergast.com/api/f1/${year}/constructorStandings.json`);
@@ -53,7 +53,7 @@ export default class DriversTable extends React.Component {
 
   render() {
     return (
-      <div className="driversTable">
+      <div className="tableDrivers">
         <table>
           <thead>
             <tr>
