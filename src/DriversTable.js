@@ -57,9 +57,6 @@ export default class DriversTable extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>{this.props.location.state.year}</th>
-            </tr>
-            <tr>
               <th>Position</th>
               <th>Name</th>
               <th>Date of Birth</th>
