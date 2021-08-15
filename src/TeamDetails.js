@@ -1,6 +1,7 @@
 import React from "react";
 import * as $ from "jquery";
 import Flag from 'react-flagkit';
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 export default class TeamDetails extends React.Component {
     constructor() {
@@ -9,7 +10,8 @@ export default class TeamDetails extends React.Component {
         this.state = {
             standings: [],
             results: [],
-            flags: []
+            flags: [],
+            races: []
         }
     }
 
@@ -31,15 +33,18 @@ export default class TeamDetails extends React.Component {
         var urlTeamsStandings = $.ajax(`http://ergast.com/api/f1/${year}/constructors/${id}/constructorStandings.json`);
         var urlTeamsResults = $.ajax(`http://ergast.com/api/f1/${year}/constructors/${id}/results.json`);
         var urlFlags = $.ajax("https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json");
+        var urlRaces = $.ajax(`http://ergast.com/api/f1/${year}/results/1.json`);
 
-        $.when(urlTeamsStandings, urlTeamsResults, urlFlags).done(function (data1, data2, data3) {
+        $.when(urlTeamsStandings, urlTeamsResults, urlFlags, urlRaces).done(function (data1, data2, data3, data4) {
             console.log(data1);
             console.log(data2);
             console.log(data3);
+            console.log(data4);
             this.setState({
                 standings: data1[0].MRData.StandingsTable.StandingsLists[0].ConstructorStandings,
                 results: data2[0].MRData.RaceTable.Races,
-                flags: JSON.parse(data3[0])
+                flags: JSON.parse(data3[0]),
+                races: data4[0].MRData.RaceTable.Races
             })
         }.bind(this)
         );
@@ -188,7 +193,18 @@ export default class TeamDetails extends React.Component {
                                                         }
                                                     }
                                                 })}
-                                                {result.raceName}
+
+                                                {this.state.races.map((race, i) => {
+                                                    if (result.round === race.round) {
+                                                        return (
+                                                            <Link to={{ pathname: `/initialTable/races/${race.round}`, state: { year: this.props.location.state.year } }}>
+                                                                {result.raceName}
+                                                            </Link>
+                                                        )
+                                                    }
+                                                })
+                                                }
+
                                             </div>
                                         </td>
                                         <td>{result.date}</td>

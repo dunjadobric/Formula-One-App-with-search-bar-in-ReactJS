@@ -5,6 +5,7 @@ import Welcome from "./Welcome";
 import DriversTable from "./DriversTable";
 import NotFound from "./NotFound";
 import TeamDetails from "./TeamDetails";
+import RaceDetails from "./RaceDetails";
 
 export default class App extends React.Component {
     constructor() {
@@ -67,6 +68,7 @@ export default class App extends React.Component {
                         {this.state.value > 1957 ? <Route path="/initialTable" exact component={DriversTable}/> : 
                         <Route path="/initialTable" exact component={NotFound}/>}
                         <Route path="/initialTable/teams/:id" exact component={TeamDetails}/>
+                        <Route path="/initialTable/races/:id" exact component={RaceDetails}/>
                     </div>
                 </Router>
             </div>
