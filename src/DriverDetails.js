@@ -3,7 +3,7 @@ import * as $ from "jquery";
 import Flag from 'react-flagkit';
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
-export default class DriversTable extends React.Component {
+export default class DriverDetails extends React.Component {
   constructor() {
     super();
 

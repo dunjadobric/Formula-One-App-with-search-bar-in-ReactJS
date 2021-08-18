@@ -46,8 +46,7 @@ export default class TeamDetails extends React.Component {
                 flags: JSON.parse(data3[0]),
                 races: data4[0].MRData.RaceTable.Races
             })
-        }.bind(this)
-        );
+        }.bind(this));
     }
 
     render() {
@@ -58,7 +57,11 @@ export default class TeamDetails extends React.Component {
                     {this.state.standings.map((standing, i) => {
                         return (
                             <div key={i}>
-                                <p>Constructor: {standing.Constructor.name}</p>
+                                <p>Constructor: {standing.Constructor.name} <a href={standing.Constructor.url} target="_blank"><i className="fas fa-external-link-alt"></i></a></p>
+                                <p>Position: {standing.position}</p>
+                                <p>Points: {standing.points}</p>
+                                <p>Wins: {standing.wins}</p>
+                                <p>Nationality: {standing.Constructor.nationality}</p>
                                 <p>
                                     {this.state.flags.map((flag, i) => {
 
@@ -120,10 +123,6 @@ export default class TeamDetails extends React.Component {
                                         }
                                     })}
                                 </p>
-                                <p>Position: {standing.position}</p>
-                                <p>Points: {standing.points}</p>
-                                <p>Wins: {standing.wins}</p>
-                                <p>Read more: <a href={standing.Constructor.url} target="_blank"><i className="fas fa-external-link-alt"></i></a></p>
                             </div>
                         )
                     })}

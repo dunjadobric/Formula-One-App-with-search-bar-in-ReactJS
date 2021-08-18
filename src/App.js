@@ -2,7 +2,7 @@ import React from "react";
 import "./scss/style.scss";
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Welcome from "./Welcome";
-import DriversTable from "./DriversTable";
+import DriverDetails from "./DriverDetails";
 import NotFound from "./NotFound";
 import TeamDetails from "./TeamDetails";
 import RaceDetails from "./RaceDetails";
@@ -65,7 +65,7 @@ export default class App extends React.Component {
                     </div>
                     <div className="content">
                         <Route path="/" exact component={Welcome}/>
-                        {this.state.value > 1957 ? <Route path="/initialTable" exact component={DriversTable}/> : 
+                        {this.state.value > 1957 ? <Route path="/initialTable" exact component={DriverDetails}/> : 
                         <Route path="/initialTable" exact component={NotFound}/>}
                         <Route path="/initialTable/teams/:id" exact component={TeamDetails}/>
                         <Route path="/initialTable/races/:id" exact component={RaceDetails}/>
