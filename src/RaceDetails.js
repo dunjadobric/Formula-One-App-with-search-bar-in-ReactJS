@@ -1,6 +1,7 @@
 import React from "react";
 import * as $ from "jquery";
 import Flag from 'react-flagkit';
+import { CircleSpinner } from "react-spinners-kit";
 
 export default class RaceDetails extends React.Component {
     constructor() {
@@ -9,7 +10,8 @@ export default class RaceDetails extends React.Component {
         this.state = {
             results: [],
             resultsTable: [],
-            flags: []
+            flags: [],
+            isLoading: true
         }
     }
 
@@ -27,12 +29,23 @@ export default class RaceDetails extends React.Component {
             this.setState({
                 results: data1[0].MRData.RaceTable.Races,
                 resultsTable: data1[0].MRData.RaceTable.Races[0].Results,
-                flags: JSON.parse(data2[0])
+                flags: JSON.parse(data2[0]),
+                isLoading: false
             })
         }.bind(this));
     }
 
     render() {
+        const { loading } = this.state;
+        if(this.state.isLoading) {
+            return(
+                <div className="racesTable">
+                    <div className="spinner">
+                        <CircleSpinner size={50} color="#ff8c00" loading={loading}/>
+                    </div>
+                </div>
+            )
+        }
         return (
             <div className="racesTable">
                 {/* racesDetails */}

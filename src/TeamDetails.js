@@ -1,7 +1,8 @@
 import React from "react";
 import * as $ from "jquery";
 import Flag from 'react-flagkit';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { CircleSpinner } from "react-spinners-kit";
 
 export default class TeamDetails extends React.Component {
     constructor() {
@@ -11,7 +12,8 @@ export default class TeamDetails extends React.Component {
             standings: [],
             results: [],
             flags: [],
-            races: []
+            races: [],
+            isLoading: true
         }
     }
 
@@ -44,14 +46,25 @@ export default class TeamDetails extends React.Component {
                 standings: data1[0].MRData.StandingsTable.StandingsLists[0].ConstructorStandings,
                 results: data2[0].MRData.RaceTable.Races,
                 flags: JSON.parse(data3[0]),
-                races: data4[0].MRData.RaceTable.Races
+                races: data4[0].MRData.RaceTable.Races,
+                isLoading: false
             })
         }.bind(this));
     }
 
     render() {
+        const { loading } = this.state;
+        if(this.state.isLoading) {
+            return(
+                <div className="teamsTable">
+                    <div className="spinner">
+                        <CircleSpinner size={50} color="#ff8c00" loading={loading}/>
+                    </div>
+                </div>
+            )
+        }
         return (
-            <div className="teams">
+            <div className="teamsTable">
                 <div className="teamsDetails">
 
                     {this.state.standings.map((standing, i) => {

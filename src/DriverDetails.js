@@ -1,7 +1,8 @@
 import React from "react";
 import * as $ from "jquery";
 import Flag from 'react-flagkit';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { CircleSpinner } from "react-spinners-kit";
 
 export default class DriverDetails extends React.Component {
   constructor() {
@@ -11,7 +12,8 @@ export default class DriverDetails extends React.Component {
       drivers: [],
       flags: [],
       teams: [],
-      teamsSeason: []
+      teamsSeason: [],
+      isLoading: true
     }
   }
 
@@ -44,7 +46,8 @@ export default class DriverDetails extends React.Component {
           drivers: data1[0].MRData.StandingsTable.StandingsLists[0].DriverStandings,
           flags: JSON.parse(data2[0]),
           teams: data3[0].MRData.StandingsTable.StandingsLists[0].ConstructorStandings,
-          teamsSeason: data3[0].MRData.StandingsTable.StandingsLists
+          teamsSeason: data3[0].MRData.StandingsTable.StandingsLists,
+          isLoading: false
         })
 
       }.bind(this)
@@ -52,8 +55,18 @@ export default class DriverDetails extends React.Component {
   }
 
   render() {
+    const { loading } = this.state;
+    if(this.state.isLoading) {
+      return(
+        <div className="driversTable">
+          <div className="spinner">
+            <CircleSpinner size={50} color="#ff8c00" loading={loading}/>
+          </div>
+        </div>
+      )
+    }
     return (
-      <div className="tableDrivers">
+      <div className="driversTable">
         <table>
           <thead>
             <tr>
