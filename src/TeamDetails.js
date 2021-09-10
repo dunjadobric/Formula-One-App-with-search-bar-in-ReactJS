@@ -64,7 +64,7 @@ export default class TeamDetails extends React.Component {
             )
         }
         return (
-            <div className="teamsTable">
+            <div className="teamsTable table">
                 <div className="teamsDetails">
 
                     {this.state.standings.map((standing, i) => {

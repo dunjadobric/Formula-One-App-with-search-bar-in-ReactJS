@@ -66,7 +66,7 @@ export default class DriverDetails extends React.Component {
       )
     }
     return (
-      <div className="driversTable">
+      <div className="driversTable table">
         <table>
           <thead>
             <tr>
@@ -76,6 +76,7 @@ export default class DriverDetails extends React.Component {
               <th>Team</th>
               <th>Points</th>
               <th>Wins</th>
+              <th>Read more</th>
             </tr>
           </thead>
           <tbody>

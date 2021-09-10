@@ -1,0 +1,50 @@
+.table {
+    width: 90%;
+    height: auto;
+    margin: 20px auto;
+
+    table {
+        width: 100%;
+
+        thead {
+            background-color: $color-gray;
+            color: $color-orange;
+
+            th {
+                text-align: left;
+                border: 1px solid $color-orange;
+                font-weight: bold;
+                padding: 10px;
+            }
+        }
+
+        tbody {
+
+            // every second row started from first row
+            tr:nth-child(2n + 1) {
+                background-color: $bcg-gray;
+            }
+
+            td {
+                border: 1px solid $color-orange;
+                padding: 10px;
+                vertical-align: middle;
+
+                div {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        margin-right: 15px;
+                    }
+                }
+
+                a {
+                    color: $color-gray;
+                    font-weight: bold;
+                }
+            }
+        }
+
+    }
+}

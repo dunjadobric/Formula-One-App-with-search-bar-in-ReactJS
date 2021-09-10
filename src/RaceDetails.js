@@ -47,7 +47,7 @@ export default class RaceDetails extends React.Component {
             )
         }
         return (
-            <div className="racesTable">
+            <div className="racesTable table">
                 {/* racesDetails */}
                 <div className="racesDetails">
                     {this.state.results.map((result, i) => {
