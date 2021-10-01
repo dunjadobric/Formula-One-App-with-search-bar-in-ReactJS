@@ -54,11 +54,11 @@ export default class TeamDetails extends React.Component {
 
     render() {
         const { loading } = this.state;
-        if(this.state.isLoading) {
-            return(
+        if (this.state.isLoading) {
+            return (
                 <div className="teamsTable">
                     <div className="spinner">
-                        <CircleSpinner size={50} color="#ff8c00" loading={loading}/>
+                        <CircleSpinner size={50} color="#ff8c00" loading={loading} />
                     </div>
                 </div>
             )
@@ -124,6 +124,12 @@ export default class TeamDetails extends React.Component {
                                             if (flag.nationality === "Zimbabwean") {
                                                 return (
                                                     <Flag key={i} country="ZW" size={40} />
+                                                )
+                                            }
+                                        } else if (standing.Constructor.nationality === "Hong Kong") {
+                                            if (flag.nationality === "Hong Kong, Hong Kongese") {
+                                                return (
+                                                    <Flag key={i} country="HK" size={40} />
                                                 )
                                             }
                                         }
@@ -271,6 +277,12 @@ export default class TeamDetails extends React.Component {
                                                                 <Flag key={i} country="ZW" size={25} />
                                                             )
                                                         }
+                                                    } else if (result.Results[0].Driver.nationality === "Hong Kong") {
+                                                        if (flag.nationality === "Hong Kong, Hong Kongese") {
+                                                            return (
+                                                                <Flag key={i} country="HK" size={25} />
+                                                            )
+                                                        }
                                                     }
                                                     else {
                                                         if (result.Results[0].Driver.nationality === flag.nationality) {
@@ -288,62 +300,71 @@ export default class TeamDetails extends React.Component {
                                         <td>
                                             <div>
                                                 {this.state.flags.map((flag, i) => {
-                                                    if (result.Results[1].Driver.nationality === "British") {
-                                                        if (flag.nationality === "British, UK") {
-                                                            return (
-                                                                <Flag key={i} country="GB" size={25} />
-                                                            )
+                                                    if (result.Results[1] !== undefined) {
+                                                        if (result.Results[1].Driver.nationality === "British") {
+                                                            if (flag.nationality === "British, UK") {
+                                                                return (
+                                                                    <Flag key={i} country="GB" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "Dutch") {
+                                                            if (flag.nationality === "Dutch, Netherlandic") {
+                                                                return (
+                                                                    <Flag key={i} country="NL" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "Monegasque") {
+                                                            if (flag.nationality === "Monégasque, Monacan") {
+                                                                return (
+                                                                    <Flag key={i} country="MC" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "New Zealander") {
+                                                            if (flag.nationality === "New Zealand, NZ") {
+                                                                return (
+                                                                    <Flag key={i} country="NZ" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "American") {
+                                                            if (flag.en_short_name === "United States of America") {
+                                                                return (
+                                                                    <Flag key={i} country="US" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "Hungarian") {
+                                                            if (flag.nationality === "Hungarian, Magyar") {
+                                                                return (
+                                                                    <Flag key={i} country="HU" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "Liechtensteiner") {
+                                                            if (flag.nationality === "Liechtenstein") {
+                                                                return (
+                                                                    <Flag key={i} country="LI" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "Rhodesian") {
+                                                            if (flag.nationality === "Zimbabwean") {
+                                                                return (
+                                                                    <Flag key={i} country="ZW" size={25} />
+                                                                )
+                                                            }
+                                                        } else if (result.Results[1].Driver.nationality === "Hong Kong") {
+                                                            if (flag.nationality === "Hong Kong, Hong Kongese") {
+                                                                return (
+                                                                    <Flag key={i} country="HK" size={25} />
+                                                                )
+                                                            }
                                                         }
-                                                    } else if (result.Results[1].Driver.nationality === "Dutch") {
-                                                        if (flag.nationality === "Dutch, Netherlandic") {
-                                                            return (
-                                                                <Flag key={i} country="NL" size={25} />
-                                                            )
-                                                        }
-                                                    } else if (result.Results[1].Driver.nationality === "Monegasque") {
-                                                        if (flag.nationality === "Monégasque, Monacan") {
-                                                            return (
-                                                                <Flag key={i} country="MC" size={25} />
-                                                            )
-                                                        }
-                                                    } else if (result.Results[1].Driver.nationality === "New Zealander") {
-                                                        if (flag.nationality === "New Zealand, NZ") {
-                                                            return (
-                                                                <Flag key={i} country="NZ" size={25} />
-                                                            )
-                                                        }
-                                                    } else if (result.Results[1].Driver.nationality === "American") {
-                                                        if (flag.en_short_name === "United States of America") {
-                                                            return (
-                                                                <Flag key={i} country="US" size={25} />
-                                                            )
-                                                        }
-                                                    } else if (result.Results[1].Driver.nationality === "Hungarian") {
-                                                        if (flag.nationality === "Hungarian, Magyar") {
-                                                            return (
-                                                                <Flag key={i} country="HU" size={25} />
-                                                            )
-                                                        }
-                                                    } else if (result.Results[1].Driver.nationality === "Liechtensteiner") {
-                                                        if (flag.nationality === "Liechtenstein") {
-                                                            return (
-                                                                <Flag key={i} country="LI" size={25} />
-                                                            )
-                                                        }
-                                                    } else if (result.Results[1].Driver.nationality === "Rhodesian") {
-                                                        if (flag.nationality === "Zimbabwean") {
-                                                            return (
-                                                                <Flag key={i} country="ZW" size={25} />
-                                                            )
+                                                        else {
+                                                            if (result.Results[1].Driver.nationality === flag.nationality) {
+                                                                return (
+                                                                    <Flag key={i} country={flag.alpha_2_code} size={25} />
+                                                                )
+                                                            }
                                                         }
                                                     }
-                                                    else {
-                                                        if (result.Results[1].Driver.nationality === flag.nationality) {
-                                                            return (
-                                                                <Flag key={i} country={flag.alpha_2_code} size={25} />
-                                                            )
-                                                        }
-                                                    }
+
                                                 })}
                                                 {result.Results[1] !== undefined ?
                                                     result.Results[1].Driver.givenName + " " + result.Results[1].Driver.familyName : "-"}

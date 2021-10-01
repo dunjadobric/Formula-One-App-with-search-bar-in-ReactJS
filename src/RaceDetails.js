@@ -241,6 +241,12 @@ export default class RaceDetails extends React.Component {
                                                             <Flag key={i} country="ZW" size={25} />
                                                         )
                                                     }
+                                                } else if (result.Constructor.nationality === "Hong Kong") {
+                                                    if (flag.nationality === "Hong Kong, Hong Kongese") {
+                                                        return (
+                                                            <Flag key={i} country="HK" size={25} />
+                                                        )
+                                                    }
                                                 }
                                                 else {
                                                     if (result.Constructor.nationality === flag.nationality) {
